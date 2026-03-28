@@ -18,8 +18,7 @@ Designed as a **standalone engine** to power **penguins-eggs** and other remaste
 
 * **Independent ISO Builder**: A standalone "Skeleton" engine inspired by the *AdrianTM* philosophy—extracting bootloaders and kernels directly from the host system without external dependencies.
 
-
-* **Safe Filesystem Orchestration**: Vitellus manages the entire root hierarchy (`bin`, `etc`, `usr`, `var`...) by mounting source directories as Read-Only and layering them with **OverlayFS** for safe writability. Simultaneously, it performs secure bind-mounts of critical kernel interfaces (`/dev`, `/proc`, `/sys`, `/run`) using private propagation (`MS_PRIVATE`), ensuring the host system remains completely untouched.
+* **Zero-Copy Filesystem Layering**: Vitellus eliminates the need for physical data duplication by projecting the host hierarchy (`/bin`, `/etc`, `/usr`, `/var`...) via Read-Only mounts. It utilizes **OverlayFS** to provide a writable environment for remastering without touching the underlying host data. Critical kernel interfaces (`/dev`, `/proc`, `/sys`, `/run`) are safely bind-mounted with private propagation (`MS_PRIVATE`) for a secure, zero-footprint operation.
 
 * **Smart Exclusions**: Supports complex exclusion lists with intelligent branch skipping (`FTW_SKIP_SUBTREE`) for maximum efficiency.
 
