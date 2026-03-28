@@ -3,10 +3,6 @@ vitellus
 *.o
 
 # --- Directory di lavoro (Staging) ---
-# Queste vengono create da Vitellus durante il 'prepare' e lo 'skeleton'
-# Non devono essere caricate su Git perché contengono file di sistema
-iso/
-liveroot/
 
 # --- File Temporanei ---
 *.tmp
