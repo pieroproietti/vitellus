@@ -35,6 +35,8 @@ int execute_verb(cJSON *task) {
 
   if (strcmp(command->valuestring, "action_prepare") == 0)
     return action_prepare(task);
+  if (strcmp(command->valuestring, "action_skeleton") == 0) 
+    return action_skeleton(task); // <-- AGGIUNTO!    
   if (strcmp(command->valuestring, "action_cleanup") == 0)
     return action_cleanup(task);
   if (strcmp(command->valuestring, "action_run") == 0)

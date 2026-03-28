@@ -1,0 +1,25 @@
+# --- Binari e Oggetti ---
+vitellus
+*.o
+
+# --- Directory di lavoro (Staging) ---
+# Queste vengono create da Vitellus durante il 'prepare' e lo 'skeleton'
+# Non devono essere caricate su Git perché contengono file di sistema
+iso/
+liveroot/
+
+# --- File Temporanei ---
+*.tmp
+*.log
+/tmp/vitellus_*
+
+# --- Editor e OS ---
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# --- Piani di test ---
+# Se vuoi tenere i tuoi plan.json privati o se sono solo per test locali
+# test_*.json

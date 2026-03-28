@@ -1,17 +1,18 @@
 {
-    "pathLiveFs": "/home/eggs",
-    "plan": [
-        {
-            "command": "action_prepare"
-        },
-        {
-            "command": "action_squash",
-            "compression": "zstd",
-            "exclude_list": "/etc/penguins-eggs.d/exclude.list",
-            "include_home": false
-        },
-        {
-            "command": "action_cleanup"
-        }
-    ]
+  "pathLiveFs": "/home/eggs",
+  "plan": [
+    { "command": "action_prepare" },
+    { "command": "action_skeleton" },
+    { 
+      "command": "action_squash", 
+      "compression": "zstd",
+      "compression_level": 3
+    },
+    { 
+      "command": "action_iso", 
+      "volume_id": "COLIBRI_VITELLUS",
+      "filename": "colibri-vitellus-final.iso" 
+    },
+    { "command": "action_cleanup" }
+  ]
 }
