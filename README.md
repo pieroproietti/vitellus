@@ -4,17 +4,8 @@ oa is a high-performance core engine written in C, designed for GNU/Linux system
 
 Designed as a **standalone engine** to power **penguins-eggs** and other remastering tools like **MX-Snapshot** — the real ancestor of penguins-eggs (*) — oa provides a clean, JSON-based interface to manage critical system-level operations.
 
-# The name oa
-The name oa is a tribute to the linguistic roots of Zagarolo, my native town. Following the Sack of Rome in 1527, the local population was decimated. To repopulate the area, families were brought in from the North-East.
-
-This created a unique linguistic pocket: while Rome's dialect evolved toward a Tuscan style, Zagarolo preserved an "Umbrian-style" dialect. Even today, the kinship with the Terni dialect is striking—sharing the same sounds, cadences, and archaic forms.
-
-oa is the local word for eggs. It represents the project's evolution: moving from the broad concept of penguins-eggs to a core engine that is as essential, native, and "raw" as its name.
-
 
 ## 🚀 Key Features
-
-
 
 * **Turbo SquashFS**: High-performance compression engine with automatic multi-core detection (`-processors`) and Zstd level tuning for maximum speed.
 
@@ -125,8 +116,18 @@ sudo ./oa plan.json
 
 
 ---
-
 *Developed with the efficiency of C and the reliability of a Clipper '87 veteran.*
+
+
+# The name oa
+
+
+The name `oa` is a tribute to the linguistic roots of Zagarolo, my native town. Following the Sack of Rome in 1527, the local population was decimated. To repopulate the area, families were brought in from the North-East.
+
+This created a unique linguistic pocket: while Rome's dialect evolved toward a Tuscan style, Zagarolo preserved an "Umbrian-style" dialect. Even today, the kinship with the Terni dialect is striking—sharing the same sounds, cadences, and archaic forms.
+
+`oa` is the local word for eggs. It represents the project's evolution: moving from the broad concept of penguins-eggs to a core engine that is as essential, native, and "raw" as its name.
+
 
 > **Historical Note:** When I started penguins-eggs, I explored the landscape of the time, studying Systemback and Remastersys, before finally discovering refracta-snapshot, which I used as my starting point. For years, I believed mx-snapshot was a sort of "cousin" based on Refracta. However, about 10 years later, I discovered a deeper truth directly from Adrian himself: mx-snapshot was the true ancestor. I had believed it was based on refracta-snapshot, but it was actually the other way around.
 
