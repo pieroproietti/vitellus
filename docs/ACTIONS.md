@@ -37,18 +37,21 @@ Every operation in **oa** is driven by a JSON "Plan." This document defines the 
 ---
 
 ## 💀 3. action_skeleton
-**Purpose**: Prepares the bootloader, kernel, and initrd for the ISO.
+**Purpose**: Prepares the bootloader, kernel, initrd for the ISO, purge users and create user live or mantain users.
 
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
 | `kernel_path` | String | Source path of the kernel (e.g., `/vmlinuz` or `/boot/vmlinuz-linux`). |
 | `initrd_cmd` | String | Shell template to generate the initrd (e.g., `mkinitramfs -o {{out}} {{ver}}`). |
+| `group_names` | String[] | Group names array`[cdrom, floppy, sudo, audio, dip, video, plugdev, netdev, autologin]`. |
+| `mode` | String | mode `""/"clone"/"homecrypt"/"fullcrypt"`|
 
 **Behavior**:
 1. Copies the kernel image to `iso/live/vmlinuz`.
 2. Detects the kernel version via `uname` or host analysis.
 3. Injects variables (`{{out}}`, `{{ver}}`) into the `initrd_cmd` and executes it.
 4. Populates `iso/isolinux/` with bootloader binaries (`isolinux.bin`, `*.c32`).
+5. If mode='' or mode='homecrypt or mode='fullcrypt' remove existing users and create live user
 
 ---
 
