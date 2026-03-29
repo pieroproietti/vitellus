@@ -44,7 +44,7 @@ Every operation in **oa** is driven by a JSON "Plan." This document defines the 
 | `kernel_path` | String | Source path of the kernel (e.g., `/vmlinuz` or `/boot/vmlinuz-linux`). |
 | `initrd_cmd` | String | Shell template to generate the initrd (e.g., `mkinitramfs -o {{out}} {{ver}}`). |
 | `groups` | Array | Group names array`[cdrom, floppy, sudo, audio, dip, video, plugdev, netdev, autologin]`. |
-| `mode` | String | ""	default, "clone", "homecrypt", "fullcrypt"|
+| `mode` | String | "", "clone", "crypted"|
 
 **Behavior**:
 1. Copies the kernel image to `iso/live/vmlinuz`.
@@ -52,10 +52,9 @@ Every operation in **oa** is driven by a JSON "Plan." This document defines the 
 3. Injects variables (`{{out}}`, `{{ver}}`) into the `initrd_cmd` and executes it.
 4. Populates `iso/isolinux/` with bootloader binaries (`isolinux.bin`, `*.c32`).
 5. Depending on the mode:
-   - "" default remove users, create live user
-   - "clone" users remain unchanged
-   - "homecrypt" remove and encrypt users, create live user
-   - "fullcrypt" remove and encrypt users, create live user
+   - "" remove users, create live user (default mode);
+   - "crypted" remove and encrypt users, create live user,
+   - "clone" users remain unchanged.
 
 ---
 
@@ -67,11 +66,13 @@ Every operation in **oa** is driven by a JSON "Plan." This document defines the 
 | `compression` | String | Algorithm to use (`zstd`, `xz`, `gzip`). Default: `zstd`. |
 | `compression_level` | Integer | Compression intensity (1-22 for zstd). |
 | `exclude_list` | String | Path to an external file containing exclusion patterns. |
+| `mode` | String | "", "clone", "crypted"|
 
 **Behavior**:
 1. Automatically detects available CPU cores for multi-threaded compression.
-2. Applies the `exclude_list` and hardcoded session excludes (e.g., `/proc/*`, `/sys/*`).
-3. Generates `iso/live/filesystem.squashfs`.
+2. Applies the `exclude_list`, hardcoded session excludes (e.g., `/proc/*`, `/sys/*`).
+3. Depending on mode, if mode="" add `/home` exclusion.
+4. Generates `iso/live/filesystem.squashfs`.
 
 ---
 
