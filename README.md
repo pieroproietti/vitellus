@@ -1,11 +1,11 @@
 # oa 🥚🥚
 
-oa (Zagarolese for eggs) is a high-performance core engine written in C, designed for GNU/Linux system remastering. It replaces fragile and slow Bash scripting with the precision and power of native Linux kernel syscalls.
+oa is a high-performance core engine written in C, designed for GNU/Linux system remastering. It replaces fragile and slow Bash scripting with the precision and power of native Linux kernel syscalls.
 
 Designed as a **standalone engine** to power **penguins-eggs** and other remastering tools like **MX-Snapshot** — the real father of penguins-eggs (*) — Vitellus provides a clean, JSON-based interface to manage critical system-level operations.
 
 # The name oa
-The name oa is a tribute to the linguistic roots of Zagarolo. Following the Sack of Rome in 1527, the local population was decimated. To repopulate the area, families were brought in from the North-East.
+The name oa is a tribute to the linguistic roots of Zagarolo, my native town. Following the Sack of Rome in 1527, the local population was decimated. To repopulate the area, families were brought in from the North-East.
 
 This created a unique linguistic pocket: while Rome's dialect evolved toward a Tuscan style, Zagarolo preserved an "Umbrian-style" dialect. Even today, the kinship with the Terni dialect is striking—sharing the same sounds, cadences, and archaic forms.
 
@@ -34,7 +34,7 @@ oa is the local word for eggs. It represents the project's evolution: moving fro
 
 
 
-Vitellus expects `squashfs-tools` and `xorriso` to be available on the host system. To compile:
+oa expects `squashfs-tools` and `xorriso` to be available on the host system. To compile:
 
 
 
@@ -46,11 +46,11 @@ make
 
 
 
-## 📂 Plan Execution (The "Matrimonio")
+## 📂 Plan Execution
 
 
 
-Vitellus can execute complex workflows through a `plan.json`. This allows for a full remastering cycle in one shot:
+oa can execute complex workflows through a `plan.json`. This allows for a full remastering cycle in one shot:
 
 
 
@@ -100,7 +100,7 @@ Vitellus can execute complex workflows through a `plan.json`. This allows for a 
 
 ```bash
 
-sudo ./vitellus plan.json
+sudo ./oa plan.json
 
 ```
 
