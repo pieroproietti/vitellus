@@ -1,13 +1,4 @@
-// src/exec_logic.c (VERSIONE ACTION_RUN - MIRROR READY)
-
-#include "cJSON.h"
-#include <errno.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/wait.h>
-#include <unistd.h>
-#include "action_run.h"
+#include "oa.h"
 
 static int execute_command(const char *chroot_path, const char *command,
                            char *const argv[]) {
@@ -66,7 +57,7 @@ int action_run(cJSON *json) {
   }
 
   // Costruiamo il percorso verso la liveroot
-  char liveroot_path[1024];
+  char liveroot_path[PATH_SAFE];
   snprintf(liveroot_path, sizeof(liveroot_path), "%s/liveroot",
            pathLiveFs->valuestring);
 

@@ -1,10 +1,4 @@
-#include "action_remaster.h"  // Il suo header
-#include "cJSON.h"           // Per manipolare i dati
-#include <stdio.h>           // Per printf, fprintf, snprintf, FILE, fopen
-#include <stdlib.h>          // Per system()
-#include <string.h>          // Per strcmp()
-#include <unistd.h>          // Per access() e F_OK
-#include <sys/utsname.h>     // Per uname()
+#include "oa.h"
 
 /**
  * @brief Prepara la struttura della ISO, copia il kernel e configura il bootloader
@@ -17,13 +11,13 @@ int action_remaster(cJSON *json) {
 
     const char *mode = (cJSON_IsString(mode_item)) ? mode_item->valuestring : "";
     char iso_dir[4096], live_dir[4096], liveroot_dir[4096], isolinux_dir[4096];
-    snprintf(iso_dir, 1024, "%s/iso", pathLiveFs->valuestring);
-    snprintf(live_dir, 1024, "%s/iso/live", pathLiveFs->valuestring);
-    snprintf(isolinux_dir, 1024, "%s/iso/isolinux", pathLiveFs->valuestring);
-    snprintf(liveroot_dir, 1024, "%s/liveroot", pathLiveFs->valuestring);
+    snprintf(iso_dir, PATH_SAFE, "%s/iso", pathLiveFs->valuestring);
+    snprintf(live_dir, PATH_SAFE, "%s/iso/live", pathLiveFs->valuestring);
+    snprintf(isolinux_dir, PATH_SAFE, "%s/iso/isolinux", pathLiveFs->valuestring);
+    snprintf(liveroot_dir, PATH_SAFE, "%s/liveroot", pathLiveFs->valuestring);
 
     // 1. Setup Struttura
-    char cmd[8192];
+    char cmd[CMD_MAX];
     snprintf(cmd, sizeof(cmd), "mkdir -p %s %s %s", live_dir, iso_dir, isolinux_dir);
     system(cmd);
 
@@ -48,7 +42,7 @@ int action_remaster(cJSON *json) {
 
     // 5. Configurazione Isolinux
     char cfg_path[4096];
-    snprintf(cfg_path, 1024, "%s/isolinux.cfg", isolinux_dir);
+    snprintf(cfg_path, PATH_SAFE, "%s/isolinux.cfg", isolinux_dir);
     if (access(cfg_path, F_OK) != 0) {
         FILE *f = fopen(cfg_path, "w");
         if (f) {

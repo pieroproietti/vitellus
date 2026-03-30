@@ -1,18 +1,4 @@
-// src/main.c
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#include "cJSON.h"
-#include "helpers.h"
-#include "action_prepare.h"
-#include "action_initrd.h"
-#include "action_remaster.h"
-#include "action_run.h"
-#include "action_scan.h"
-#include "action_squash.h"
-#include "action_iso.h"
+#include "oa.h"
 
 // Helper per leggere il file JSON
 char *read_file(const char *filename) {

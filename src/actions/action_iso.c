@@ -1,11 +1,4 @@
-#include "cJSON.h"
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/utsname.h>
-#include "action_iso.h"
+#include "oa.h"
 
 /**
  * @brief Finalizza la ISO avviabile
@@ -17,9 +10,9 @@ int action_iso(cJSON *json) {
 
     if (!cJSON_IsString(pathLiveFs)) return 1;
 
-    char iso_root[1024], output_iso[1024];
-    snprintf(iso_root, 1024, "%s/iso", pathLiveFs->valuestring);
-    snprintf(output_iso, 1024, "%s/%s", pathLiveFs->valuestring, 
+    char iso_root[PATH_SAFE], output_iso[PATH_SAFE];
+    snprintf(iso_root, PATH_SAFE, "%s/iso", pathLiveFs->valuestring);
+    snprintf(output_iso, PATH_SAFE, "%s/%s", pathLiveFs->valuestring, 
              cJSON_IsString(iso_name) ? iso_name->valuestring : "live-system.iso");
 
     char cmd[8192];
