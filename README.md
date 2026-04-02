@@ -25,7 +25,11 @@ It manages the full lifecycle: from laying the ISO to the final installation.
 The name derives from the dialect word coa, referring to the act of brooding or incubating eggs until they are ready to hatch.
 
 **Language: Go**
-
+Actual commands
+- detect
+- kill
+- produce
+- version
 ---
 
 ## 🚀 Getting Started
