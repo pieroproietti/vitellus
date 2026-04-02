@@ -10,7 +10,7 @@ The project is divided into two distinct entities: **oa** (The Arm) and **coa** 
 
 We have transitioned to a monorepo structure to ensure perfect synchronization between the engine (oa) and the orchestrator (coa).
 
-### 🦾 [oa (eggs in my dialect)](./oa) - The Arm
+### 🦾 [oa (eggs in my dialect)](./oa) - The arm
 **Language: C**
 `oa` is the low-level engine. It handles the "heavy lifting" of the system:
 - Managing OverlayFS and mount points.
@@ -19,7 +19,7 @@ We have transitioned to a monorepo structure to ensure perfect synchronization b
 - Interacting directly with the Linux Kernel and system binaries.
 - **Philosophy:** Performance, stability, and zero-dependency execution.
 
-### 🧠 [coa (coa means 'brooding' or 'hatching' in my dialect)](./coa) - The Mind
+### 🧠 [coa ('brooding' or 'hatching' in my dialect)](./coa) - The brain
 
 The name derives from the dialect word coa, referring to the act of nesting or incubating the eggs until they are ready to hatch.
 
