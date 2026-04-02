@@ -65,6 +65,16 @@ oa can execute complex workflows through a `plan.json`. This allows for a full r
 sudo ./oa plan.json
 ```
 
+## 🧠 Philosophy & Universal Strategy
+
+**oa** is not just a copy tool; it is the raw execution engine for a broader ecosystem (*penguins-eggs* and hopefully others). It achieves true distro-agnosticism (supporting Debian, Arch, RHEL, SUSE, Manjaro, etc.) by intentionally leaving the "thinking" to a higher-level orchestrator and relying on core architectural pillars like:
+1. **The "Debian Passepartout" Bootloader**
+2. **Yocto-Style Native Identity Forging**
+3. **The Initramfs Abstraction**
+4. **The "Eggs vs Bananas" Biological Diversity Paradigm**
+
+To fully understand the architecture and the strategy behind this engine, please read the [Universal Remastering Strategy](docs/UNIVERSAL_STRATEGY.md) and the [Architecture Guide](docs/ARCHITECTURE.md).
+
 ## 🗺 Roadmap
 
 The development goals and future milestones have been moved to a dedicated document. 
