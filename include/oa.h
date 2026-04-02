@@ -46,6 +46,7 @@ typedef struct {
 // Devono stare QUI in fondo, per evitare inclusioni circolari,
 // in modo che OA_Context sia già definito quando vengono letti.
 #include "action_prepare.h"  // Contiene anche action_cleanup
+#include "action_cleanup.h"
 #include "action_crypted.h"
 #include "action_initrd.h"
 #include "action_iso.h"

@@ -161,28 +161,3 @@ int action_prepare(OA_Context *ctx) {
     return 0;
 }
 
-int action_cleanup(OA_Context *ctx) {
-    cJSON *path_item = cJSON_GetObjectItemCaseSensitive(ctx->task, "pathLiveFs");
-    if (!path_item) path_item = cJSON_GetObjectItemCaseSensitive(ctx->root, "pathLiveFs");
-    if (!cJSON_IsString(path_item)) return 1;
-
-    const char *base = path_item->valuestring;
-    char liveroot_path[PATH_SAFE];
-    snprintf(liveroot_path, sizeof(liveroot_path), "%s/liveroot", base);
-
-    // 1. Smontiamo la maschera Anti-Ricorsione Globale se presente
-    char nested_base[PATH_SAFE];
-    snprintf(nested_base, sizeof(nested_base), "%s%s", liveroot_path, base);
-    umount2(nested_base, MNT_DETACH);
-
-    // 2. Smontaggio principale in ordine inverso, includendo /home
-    char p[PATH_SAFE];
-    const char *to_umount[] = {"dev/pts", "dev", "run", "sys", "proc", "usr", "var", "home"};
-    for(int i=0; i<8; i++) {
-        snprintf(p, sizeof(p), "%s/%s", liveroot_path, to_umount[i]);
-        umount2(p, MNT_DETACH); // Fallisce silenziosamente se non era montato
-    }
-
-    printf("\033[1;32m[oa CLEANUP]\033[0m Cleanup completed.\n");
-    return 0;
-}

@@ -1,15 +1,11 @@
 /*
-* oa: eggs in my dialect🥚🥚
-* remastering core
+* oa: remastering core
 *
 * Author: Piero Proietti <piero.proietti@gmail.com>
 * License: GPL-3.0-or-later
 */
 #include "oa.h"
 
-/**
- * @brief Finalizza la ISO avviabile (BIOS + UEFI) usando il contesto globale/locale
- */
 int action_iso(OA_Context *ctx) {
     // 1. Lookup Strategico: Locale (task) > Globale (root)
     cJSON *pathLiveFs = cJSON_GetObjectItemCaseSensitive(ctx->task, "pathLiveFs");
@@ -30,12 +26,16 @@ int action_iso(OA_Context *ctx) {
     }
 
     char iso_root[PATH_SAFE], output_iso_path[PATH_SAFE];
-    
-    // Definiamo la sorgente (cartella iso) e la destinazione (file .iso)
     snprintf(iso_root, sizeof(iso_root), "%s/iso", pathLiveFs->valuestring);
-    snprintf(output_iso_path, sizeof(output_iso_path), "%s/%s", 
-             pathLiveFs->valuestring, 
-             cJSON_IsString(output_iso) ? output_iso->valuestring : "live-system.iso");
+    
+    // Logica Smart Path: Relativo vs Assoluto
+    const char *iso_target = cJSON_IsString(output_iso) ? output_iso->valuestring : "live-system.iso";
+    if (iso_target[0] == '/') {
+        strncpy(output_iso_path, iso_target, PATH_SAFE);
+        printf("\033[1;34m[oa ISO Mode]\033[0m Absolute output path detected. Writing directly to: %s\n", output_iso_path);
+    } else {
+        snprintf(output_iso_path, sizeof(output_iso_path), "%s/%s", pathLiveFs->valuestring, iso_target);
+    }
 
     // 2. Risoluzione percorso isohdpfx.bin (MBR ibrido)
     char isohdpfx_src[PATH_SAFE];
@@ -56,7 +56,6 @@ int action_iso(OA_Context *ctx) {
         char efi_img_path[PATH_SAFE];
         snprintf(efi_img_path, PATH_SAFE, "%s/boot/grub/efi.img", iso_root);
 
-        // Alloca 4MB, formatta in FAT, monta in loop, copia la cartella EFI e smonta
         snprintf(cmd, sizeof(cmd),
             "dd if=/dev/zero of=%s bs=1M count=4 status=none && "
             "mkfs.vfat %s >/dev/null && "
@@ -83,7 +82,7 @@ int action_iso(OA_Context *ctx) {
              "-partition_offset 16 -V '%s' "
              "-b isolinux/isolinux.bin -c isolinux/boot.cat "
              "-no-emul-boot -boot-load-size 4 -boot-info-table "
-             "%s" // Iniezione argomenti UEFI (se efi.img è stato creato)
+             "%s" 
              "-o %s %s/",
              isohdpfx_src,
              cJSON_IsString(volid) ? volid->valuestring : "OA_LIVE",
@@ -91,8 +90,7 @@ int action_iso(OA_Context *ctx) {
              output_iso_path, 
              iso_root);
 
-    printf("\n\033[1;32m[oa ISO Mode]\033[0m Finalizing Hybrid ISO: %s\n", 
-           cJSON_IsString(output_iso) ? output_iso->valuestring : "live-system.iso");
+    printf("\n\033[1;32m[oa ISO Mode]\033[0m Finalizing Hybrid ISO: %s\n", output_iso_path);
            
     return system(cmd);
 }
