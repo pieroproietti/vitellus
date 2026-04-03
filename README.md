@@ -2,7 +2,7 @@
 
 Welcome to **oa-tools**, born from `penguins-eggs` experience. This monorepo hosts a split-responsibility system designed for high-performance Linux remastering, following the "Universal Strategy" of absolute portability.
 
-The project is divided into two distinct entities: **oa** (The Arm) and **coa** (The Mind).
+The project is divided into two distinct entities: **oa** (The Workhorse) and **coa** (The Mind).
 
 ---
 
@@ -10,7 +10,7 @@ The project is divided into two distinct entities: **oa** (The Arm) and **coa** 
 
 We have transitioned to a monorepo structure to ensure perfect synchronization between the engine (oa) and the orchestrator (coa).
 
-### 🦾 [oa (eggs in my dialect)](./oa) - The arm
+### 🦾 [oa (eggs in my dialect)](./oa) - The Workhorse
 **Language: C**
 `oa` is the low-level engine. It handles the "heavy lifting" of the system:
 - Managing OverlayFS and mount points.
@@ -58,7 +58,7 @@ sudo ln -sf "$(pwd)/coa/coa" /usr/local/bin/coa
 ---
 
 ## 📜 Philosophy
-The **oa-tools** project aims to provide a "Passepartout" for Linux remastering. By separating the **Mind** (Go) from the **Arm** (C), we achieve a clean, maintainable, and incredibly fast workflow that can adapt to any distribution without changing the user experience.
+The **oa-tools** project aims to provide a "Passepartout" for Linux remastering. By separating the **Mind** (Go) from the **Workhorse** (C), we achieve a clean, maintainable, and incredibly fast workflow that can adapt to any distribution without changing the user experience.
 
 ---
 *Created with passion by Piero Proietti.*

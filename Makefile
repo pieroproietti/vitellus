@@ -10,9 +10,9 @@ COA_BIN = $(COA_DIR)/coa
 
 all: build_oa build_coa
 	@echo "--------------------------------------"
-	@echo "Schiusa completata con successo! 🐣"
-	@echo "Braccio (C):  ./$(OA_BIN)"
-	@echo "Mente (Go):   ./$(COA_BIN)"
+	@echo "Hatching completed successfully! 🐣"
+	@echo "Workhorse (C):  ./$(OA_BIN)"
+	@echo "Brain (Go):   ./$(COA_BIN)"
 	@echo "--------------------------------------"
 
 build_oa:
