@@ -14,8 +14,8 @@ FILES=(
   src/*
   go.mod
   go.sum
+  m
   coa-contest.sh
-  Makefile
   README.md
 )
 

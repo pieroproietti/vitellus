@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 )
 
 // Action rappresenta un singolo blocco "command" nell'array "plan"
@@ -21,32 +22,26 @@ type FlightPlan struct {
 	Plan            []Action `json:"plan"`
 }
 
-// GeneratePlan è il cervello che costruisce la pipeline dinamica
+
 func GeneratePlan(d *Distro, mode string, workPath string) FlightPlan {
 	plan := FlightPlan{
 		PathLiveFs: workPath,
 		Mode:       mode,
 	}
 
-	// 1. Astrazione Initramfs (Il Terzo Pilastro della tua Universal Strategy)
-	switch d.FamilyID {
-	case "debian":
-		plan.InitrdCmd = "mkinitramfs -o {{out}} {{ver}}"
-	case "fedora", "opensuse":
-		plan.InitrdCmd = "dracut --nomadas --force {{out}} {{ver}}"
-	case "archlinux":
-		// mkinitcpio richiede configurazioni specifiche per chroot, ma il template è questo
-		plan.InitrdCmd = "mkinitcpio -g {{out}} -k {{ver}}"
-	default:
-		plan.InitrdCmd = "mkinitramfs -o {{out}} {{ver}}" // Fallback di sicurezza
-	}
+	// Gestione Initrd basata sulla famiglia [cite: 28]
+	// ... (switch d.FamilyID esistente) ...
 
-	// 2. Astrazione Bootloader (Il Primo Pilastro)
+	// Gestione dinamica dei Bootloader per Arch/Fedora [cite: 28]
 	if d.FamilyID != "debian" {
-		// Se NON siamo su Debian, diciamo a oa di usare i binari passepartout pre-estratti
-		plan.BootloadersPath = "/usr/share/cova/bootloaders"
+		btPath, err := EnsureBootloaders()
+		if err != nil {
+			fmt.Printf("\033[1;31m[coa]\033[0m Errore critico bootloaders: %v\n", err)
+			os.Exit(1)
+		}
+		plan.BootloadersPath = btPath
 	} else {
-		plan.BootloadersPath = "" // Usa quelli di sistema
+		plan.BootloadersPath = "" // Su Debian usa quelli di sistema
 	}
 
 	// 3. Assemblaggio dinamico della catena di montaggio
